@@ -4,7 +4,7 @@
 Summary:	GObject-based wrapper around the  Exiv2 library
 Name:		gexiv2
 Version:	0.1.0
-Release:	2
+Release:	1
 License:	GPL
 Group:		Applications/Graphics
 Source0:	http://yorba.org/download/gexiv2/0.1/lib%{name}-%{version}.tar.bz2
@@ -23,6 +23,7 @@ the basic features of Exiv2 available to GNOME applications.
 %package devel
 Summary:	GObject-based wrapper around the  Exiv2 library
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 Requires:	exiv2-devel >= 0.19
 
 %description devel
@@ -31,6 +32,7 @@ gexiv2 development files
 %package static
 Summary:	GObject-based wrapper around the  Exiv2 library
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 Requires:	exiv2-static >= 0.19
 
 %description static
