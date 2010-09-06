@@ -3,13 +3,13 @@
 
 Summary:	GObject-based wrapper around the  Exiv2 library
 Name:		gexiv2
-Version:	0.1.0
+Version:	0.2.0
 Release:	1
 License:	GPL
 Group:		Applications/Graphics
-Source0:	http://yorba.org/download/gexiv2/0.1/lib%{name}-%{version}.tar.bz2
-# Source0-md5:	efae406dac86aa6db4cfb75569cbb3f9
-URL:		http://libexif.sourceforge.net/
+Source0:	http://yorba.org/download/gexiv2/0.2/lib%{name}-%{version}.tar.bz2
+# Source0-md5:	2bdedaa705260a1f36ae335a5a426f6a
+URL:		http://trac.yorba.org/wiki/gexiv2
 Patch0:		%{name}-libtool.patch
 BuildRequires:	exiv2-devel >= 0.19
 BuildRequires:	pkgconfig
@@ -40,7 +40,7 @@ gexiv2 static library
 
 %prep
 %setup -q -n lib%{name}-%{version}
-%patch0 -p0
+#%patch0 -p0
 
 %build
 %{__libtoolize}
