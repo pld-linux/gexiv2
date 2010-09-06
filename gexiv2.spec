@@ -10,7 +10,6 @@ Group:		Applications/Graphics
 Source0:	http://yorba.org/download/gexiv2/0.2/lib%{name}-%{version}.tar.bz2
 # Source0-md5:	2bdedaa705260a1f36ae335a5a426f6a
 URL:		http://trac.yorba.org/wiki/gexiv2
-Patch0:		%{name}-libtool.patch
 BuildRequires:	exiv2-devel >= 0.19
 BuildRequires:	pkgconfig
 Requires:	exiv2-libs >= 0.19
@@ -40,7 +39,6 @@ gexiv2 static library
 
 %prep
 %setup -q -n lib%{name}-%{version}
-#%patch0 -p0
 
 %build
 %{__libtoolize}
@@ -68,6 +66,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib%{name}.la
 %{_includedir}/%{name}
 %{_pkgconfigdir}/%{name}.pc
+/usr/share/vala/vapi/gexiv2.vapi
 
 %files static
 %defattr(644,root,root,755)
