@@ -4,7 +4,7 @@
 Summary:	GObject-based wrapper around the  Exiv2 library
 Name:		gexiv2
 Version:	0.2.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Graphics
 Source0:	http://yorba.org/download/gexiv2/0.2/lib%{name}-%{version}.tar.bz2
@@ -12,6 +12,7 @@ Source0:	http://yorba.org/download/gexiv2/0.2/lib%{name}-%{version}.tar.bz2
 URL:		http://trac.yorba.org/wiki/gexiv2
 BuildRequires:	exiv2-devel >= 0.19
 BuildRequires:	pkgconfig
+BuildRequires:	vala
 Requires:	exiv2-libs >= 0.19
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,13 +45,15 @@ gexiv2 static library
 %{__libtoolize}
 ./configure --prefix=%{_prefix}
 
-%{__make}
+%{__make} \
+	LIB="%{_lib}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIB="%{_lib}"
 
 %clean
 rm -rf $RPM_BUILD_ROOT
