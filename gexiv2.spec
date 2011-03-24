@@ -1,18 +1,20 @@
-# TODO:
-# - Add bcond for vapi support and subpackage
-
-Summary:	GObject-based wrapper around the  Exiv2 library
+Summary:	GObject-based wrapper around the Exiv2 library
+Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.3.0
+Version:	0.3.1
 Release:	1
-License:	GPL
-Group:		Applications/Graphics
+License:	GPL v2
+Group:		Libraries
 Source0:	http://yorba.org/download/gexiv2/0.3/lib%{name}-%{version}.tar.bz2
-# Source0-md5:	b6b2b2ae3c7d57a85d8c346b418ff98c
+# Source0-md5:	066ec95994ae34d7bec39de13123f5a3
 URL:		http://trac.yorba.org/wiki/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
+BuildRequires:	glib2-devel >= 1:2.0
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:1.5
+BuildRequires:	m4
 BuildRequires:	pkgconfig
-BuildRequires:	vala
+BuildRequires:	sed >= 4.0
 Requires:	exiv2-libs >= 0.21
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -20,34 +22,65 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 gexiv2 is a GObject-based wrapper around the Exiv2 library. It makes
 the basic features of Exiv2 available to GNOME applications.
 
+%description -l pl.UTF-8
+gexiv2 to oparte na GObject obudowanie biblioteki Exiv2. Udostępnia
+podstawowe możliwości Exiv2 aplikacjom GNOME.
+
 %package devel
-Summary:	GObject-based wrapper around the  Exiv2 library
+Summary:	Header files for gexiv2 library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gexiv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	exiv2-devel >= 0.19
+Requires:	exiv2-devel >= 0.21
+Requires:	glib2-devel >= 1:2.0
+Requires:	libstdc++-devel
 
 %description devel
-gexiv2 development files
+Header files for gexiv2 library.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki gexiv2.
 
 %package static
-Summary:	GObject-based wrapper around the  Exiv2 library
+Summary:	Static gexiv2 library
+Summary(pl.UTF-8):	Statyczna biblioteka gexiv2
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	exiv2-static >= 0.19
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-gexiv2 static library
+Static gexiv2 library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka gexiv2.
+
+%package -n vala-gexiv2
+Summary:	Vala binding for gexiv2 library
+Summary(pl.UTF-8):	Wiązanie języka vala do biblioteki gexiv2
+Group:		Development/Languages
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description -n vala-gexiv2
+Vala binding for gexiv2 library.
+
+%description -n vala-gexiv2 -l pl.UTF-8
+Wiązanie języka vala do biblioteki gexiv2.
 
 %prep
 %setup -q -n lib%{name}-%{version}
 
 %build
-%{__libtoolize}
-./configure --prefix=%{_prefix}
+# not autoconf-generated
+./configure \
+	--prefix=%{_prefix}
 
 %{__make} \
+	CFLAGS="%{rpmcflags}" \
+	CXX="%{__cxx}" \
 	LIB="%{_lib}" \
 	LDFLAGS="-lm"
+
+# fix hardcoded ${exec_prefix}/lib
+sed -i -e 's,^libdir=.*,libdir=%{_libdir},' gexiv2.pc
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -56,25 +89,29 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	LIB="%{_lib}"
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib%{name}.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib%{name}.so.0
-%attr(755,root,root) %{_libdir}/lib%{name}.so
+%doc AUTHORS MAINTAINERS NEWS README THANKS
+%attr(755,root,root) %{_libdir}/libgexiv2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgexiv2.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/lib%{name}.la
-%{_includedir}/%{name}
-%{_pkgconfigdir}/%{name}.pc
-%{_datadir}/vala/vapi/gexiv2.vapi
+%attr(755,root,root) %{_libdir}/libgexiv2.so
+%{_libdir}/libgexiv2.la
+%{_includedir}/gexiv2
+%{_pkgconfigdir}/gexiv2.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib%{name}.a
+%{_libdir}/libgexiv2.a
+
+%files -n vala-gexiv2
+%defattr(644,root,root,755)
+%{_datadir}/vala/vapi/gexiv2.vapi
