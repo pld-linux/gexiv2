@@ -1,12 +1,12 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.3.1
+Version:	0.3.92
 Release:	1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://yorba.org/download/gexiv2/0.3/lib%{name}-%{version}.tar.bz2
-# Source0-md5:	066ec95994ae34d7bec39de13123f5a3
+# Source0-md5:	35696a9da49351cfec360147d34ae1ee
 URL:		http://trac.yorba.org/wiki/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
 BuildRequires:	glib2-devel >= 1:2.0
