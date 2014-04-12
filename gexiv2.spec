@@ -6,7 +6,7 @@ Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
 Version:	0.10.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
@@ -68,7 +68,7 @@ Summary:	Python 2 binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do biblioteki gexiv2
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	python-gobject3 >= 3
+Requires:	python-pygobject3 >= 3
 
 %description -n python-gexiv2
 Python 2 binding for gexiv2 library.
@@ -81,7 +81,7 @@ Summary:	Python 3 binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie Pythona 3 do biblioteki gexiv2
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
-Requires:	python3-gobject3 >= 3
+Requires:	python3-pygobject3 >= 3
 
 %description -n python3-gexiv2
 Python 3 binding for gexiv2 library.
