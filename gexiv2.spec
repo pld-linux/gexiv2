@@ -5,12 +5,12 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.10.1
+Version:	0.10.2
 Release:	1
 License:	GPL v2
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	3d9d966a477b1eab752756cfd72b5da0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
+# Source0-md5:	ba3e5f4e9e4b68822c80276014b5d61b
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
 BuildRequires:	glib2-devel >= 1:2.26.1
@@ -21,7 +21,7 @@ BuildRequires:	m4
 BuildRequires:	pkgconfig >= 1:0.26
 BuildRequires:	python >= 2
 BuildRequires:	python-pygobject3-devel >= 3
-BuildRequires:	python3 >= 3.2
+BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	exiv2-libs >= 0.21
