@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# static library
-#
+
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
 Version:	0.10.3
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
@@ -94,6 +94,9 @@ Summary:	Vala binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie języka vala do biblioteki gexiv2
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n vala-gexiv2
 Vala binding for gexiv2 library.
