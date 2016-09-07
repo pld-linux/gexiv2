@@ -5,12 +5,12 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.10.3
-Release:	5
+Version:	0.10.4
+Release:	1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	f255100a009027d4eaa0f075bb79c655
+# Source0-md5:	7d6f7f76c0765a6911f9f9fa4b97cab8
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
 BuildRequires:	glib2-devel >= 1:2.26.1
@@ -118,7 +118,11 @@ Wiązanie języka vala do biblioteki gexiv2.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	typelibdir=%{_libdir}/girepository-1.0
+
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgexiv2.la
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
@@ -140,7 +144,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgexiv2.so
-%{_libdir}/libgexiv2.la
 %{_datadir}/gir-1.0/GExiv2-0.10.gir
 %{_includedir}/gexiv2
 %{_pkgconfigdir}/gexiv2.pc
