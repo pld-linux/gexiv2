@@ -1,16 +1,17 @@
 #
 # Conditional build:
+%bcond_without	apidocs		# disable gtk-doc
 %bcond_without	static_libs	# static library
 
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.10.4
-Release:	2
+Version:	0.10.5
+Release:	1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	7d6f7f76c0765a6911f9f9fa4b97cab8
+# Source0-md5:	ee99e45cfc72db3041e7eb83f1c64372
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
 BuildRequires:	glib2-devel >= 1:2.26.1
@@ -63,6 +64,21 @@ Static gexiv2 library.
 %description static -l pl.UTF-8
 Statyczna biblioteka gexiv2.
 
+%package apidocs
+Summary:	gexiv2 API documentation
+Summary(pl.UTF-8):	Dokumentacja API gexiv2
+Group:		Documentation
+Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description apidocs
+gexiv2 API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API gexiv2.
+
 %package -n python-gexiv2
 Summary:	Python 2 binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do biblioteki gexiv2
@@ -109,8 +125,11 @@ Wiązanie języka vala do biblioteki gexiv2.
 
 %build
 %configure \
+	%{__enable_disable apidocs gtk-doc} \
 	--enable-introspection \
-	%{?with_static_libs:--enable-static}
+	%{?with_static_libs:--enable-static} \
+	--disable-silent-rules \
+	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
 
@@ -153,6 +172,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libgexiv2.a
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/gexiv2
 
 %files -n python-gexiv2
 %defattr(644,root,root,755)
