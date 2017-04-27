@@ -16,8 +16,8 @@ URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
 BuildRequires:	glib2-devel >= 1:2.26.1
 BuildRequires:	gobject-introspection-devel >= 0.10
+BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
 BuildRequires:	m4
 BuildRequires:	pkgconfig >= 1:0.26
 BuildRequires:	python >= 2
