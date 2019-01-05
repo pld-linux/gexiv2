@@ -6,15 +6,15 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.10.7
-Release:	2
+Version:	0.10.10
+Release:	1
 License:	GPL v2
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	01e1b860ffe35f5946020c3d5c4c50c9
+# Source0-md5:	3980534e5d1696b17514465ff25e256d
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.21
-BuildRequires:	glib2-devel >= 1:2.26.1
+BuildRequires:	glib2-devel >= 1:2.38.0
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libstdc++-devel
@@ -26,7 +26,7 @@ BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
 BuildRequires:	rpmbuild(macros) >= 1.219
 Requires:	exiv2-libs >= 0.21
-Requires:	glib2 >= 1:2.26.1
+Requires:	glib2 >= 1:2.38.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -43,7 +43,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gexiv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	exiv2-devel >= 0.21
-Requires:	glib2-devel >= 1:2.26.1
+Requires:	glib2-devel >= 1:2.38.0
 Requires:	libstdc++-devel
 
 %description devel
