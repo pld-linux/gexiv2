@@ -6,26 +6,28 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.10.10
-Release:	2
+Version:	0.12.0
+Release:	1
 License:	GPL v2
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.10/%{name}-%{version}.tar.xz
-# Source0-md5:	3980534e5d1696b17514465ff25e256d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.12/%{name}-%{version}.tar.xz
+# Source0-md5:	0a618c5b053106d1801d89cc77385419
 URL:		https://wiki.gnome.org/Projects/gexiv2
-BuildRequires:	exiv2-devel >= 0.21
+BuildRequires:	exiv2-devel >= 0.26
 BuildRequires:	glib2-devel >= 1:2.38.0
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	libstdc++-devel
-BuildRequires:	m4
+BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	meson
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.26
 BuildRequires:	python >= 2
 BuildRequires:	python-pygobject3-devel >= 3
 BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
-BuildRequires:	rpmbuild(macros) >= 1.219
-Requires:	exiv2-libs >= 0.21
+BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	vala
+Requires:	exiv2-libs >= 0.26
 Requires:	glib2 >= 1:2.38.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +44,7 @@ Summary:	Header files for gexiv2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gexiv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	exiv2-devel >= 0.21
+Requires:	exiv2-devel >= 0.26
 Requires:	glib2-devel >= 1:2.38.0
 Requires:	libstdc++-devel
 
@@ -124,28 +126,22 @@ Wiązanie języka vala do biblioteki gexiv2.
 %setup -q
 
 %build
-%configure \
-	%{__enable_disable apidocs gtk-doc} \
-	--enable-introspection \
-	%{?with_static_libs:--enable-static} \
-	--disable-silent-rules \
-	--with-html-dir=%{_gtkdocdir}
+%meson build \
+	%{?with_apidocs:-Dgtk_doc=true}
 
-%{__make}
+%ninja_build -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	typelibdir=%{_libdir}/girepository-1.0
-
-# obsoleted by pkg-config
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgexiv2.la
+%ninja_install -C build
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_postclean
+
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}/gi/overrides
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}/gi/overrides
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -155,7 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS NEWS README THANKS
+%doc AUTHORS MAINTAINERS NEWS README THANKS
 %attr(755,root,root) %{_libdir}/libgexiv2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgexiv2.so.2
 %{_libdir}/girepository-1.0/GExiv2-0.10.typelib
@@ -184,7 +180,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python3-gexiv2
 %defattr(644,root,root,755)
 %{py3_sitedir}/gi/overrides/GExiv2.py
+%{py3_sitedir}/gi/overrides/__pycache__/GExiv2.cpython-*.py[co]
 
 %files -n vala-gexiv2
 %defattr(644,root,root,755)
+%{_datadir}/vala/vapi/gexiv2.deps
 %{_datadir}/vala/vapi/gexiv2.vapi
