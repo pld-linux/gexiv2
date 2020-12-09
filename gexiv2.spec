@@ -169,9 +169,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libgexiv2.a
 %endif
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gexiv2
+%endif
 
 %files -n python-gexiv2
 %defattr(644,root,root,755)
