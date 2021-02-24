@@ -6,29 +6,29 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.12.1
+Version:	0.12.2
 Release:	1
-License:	GPL v2
+License:	GPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gexiv2/0.12/%{name}-%{version}.tar.xz
-# Source0-md5:	44a3cfeab1afd83a71e852835d24e656
+Source0:	https://download.gnome.org/sources/gexiv2/0.12/%{name}-%{version}.tar.xz
+# Source0-md5:	4c0cd962f021f937507904df147ea750
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.26
-BuildRequires:	glib2-devel >= 1:2.38.0
+BuildRequires:	glib2-devel >= 1:2.46.0
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libstdc++-devel >= 6:4.7
-BuildRequires:	meson
+BuildRequires:	meson >= 0.48
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.26
 BuildRequires:	python >= 2
 BuildRequires:	python-pygobject3-devel >= 3
 BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	vala
 Requires:	exiv2-libs >= 0.26
-Requires:	glib2 >= 1:2.38.0
+Requires:	glib2 >= 1:2.46.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,7 +45,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gexiv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	exiv2-devel >= 0.26
-Requires:	glib2-devel >= 1:2.38.0
+Requires:	glib2-devel >= 1:2.46.0
 Requires:	libstdc++-devel
 
 %description devel
@@ -71,9 +71,7 @@ Summary:	gexiv2 API documentation
 Summary(pl.UTF-8):	Dokumentacja API gexiv2
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 gexiv2 API documentation.
@@ -112,9 +110,7 @@ Summary:	Vala binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie języka vala do biblioteki gexiv2
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description -n vala-gexiv2
 Vala binding for gexiv2 library.
@@ -151,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS MAINTAINERS NEWS README THANKS
+%doc AUTHORS NEWS README THANKS
 %attr(755,root,root) %{_libdir}/libgexiv2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgexiv2.so.2
 %{_libdir}/girepository-1.0/GExiv2-0.10.typelib
