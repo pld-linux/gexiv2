@@ -71,7 +71,7 @@ Summary:	gexiv2 API documentation
 Summary(pl.UTF-8):	Dokumentacja API gexiv2
 Group:		Documentation
 Requires:	gtk-doc-common
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 gexiv2 API documentation.
@@ -110,7 +110,7 @@ Summary:	Vala binding for gexiv2 library
 Summary(pl.UTF-8):	Wiązanie języka vala do biblioteki gexiv2
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n vala-gexiv2
 Vala binding for gexiv2 library.
