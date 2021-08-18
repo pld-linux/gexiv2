@@ -6,14 +6,14 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.12.2
-Release:	2
+Version:	0.12.3
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gexiv2/0.12/%{name}-%{version}.tar.xz
-# Source0-md5:	4c0cd962f021f937507904df147ea750
+# Source0-md5:	9667fc1b35e79834191262f4aec17b72
 URL:		https://wiki.gnome.org/Projects/gexiv2
-BuildRequires:	exiv2-devel >= 0.26
+BuildRequires:	exiv2-devel >= 0.27.4
 BuildRequires:	glib2-devel >= 1:2.46.0
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
@@ -25,9 +25,12 @@ BuildRequires:	python >= 2
 BuildRequires:	python-pygobject3-devel >= 3
 BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala
-Requires:	exiv2-libs >= 0.26
+BuildRequires:	xz
+Requires:	exiv2-libs >= 0.27.4
 Requires:	glib2 >= 1:2.46.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,7 +47,7 @@ Summary:	Header files for gexiv2 library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gexiv2
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	exiv2-devel >= 0.26
+Requires:	exiv2-devel >= 0.27.4
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	libstdc++-devel
 
