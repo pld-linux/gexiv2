@@ -6,12 +6,12 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.12.3
+Version:	0.14.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	https://download.gnome.org/sources/gexiv2/0.12/%{name}-%{version}.tar.xz
-# Source0-md5:	9667fc1b35e79834191262f4aec17b72
+Source0:	https://download.gnome.org/sources/gexiv2/0.14/%{name}-%{version}.tar.xz
+# Source0-md5:	b4b1ac55bf9d32fb36a35eb346e1728e
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.27.4
 BuildRequires:	glib2-devel >= 1:2.46.0
@@ -135,6 +135,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
+# no longer installed by meson
+install -d $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
+cp -p GExiv2.py $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
 %py_postclean
