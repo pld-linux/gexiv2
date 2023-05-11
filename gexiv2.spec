@@ -1,3 +1,5 @@
+# NOTE: on updates verify GExiv2.py python2 compatibility;
+#       when broken, fork last compatible version of GExiv2.py to python-gexiv2.spec
 #
 # Conditional build:
 %bcond_without	apidocs		# disable gtk-doc
@@ -6,19 +8,20 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.14.0
-Release:	3
+Version:	0.14.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gexiv2/0.14/%{name}-%{version}.tar.xz
-# Source0-md5:	b4b1ac55bf9d32fb36a35eb346e1728e
+# Source0-md5:	b4a7b5e0f2e50a8d295bb2782e071a7f
+Patch0:		%{name}-python-archdir.patch
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.27.4
 BuildRequires:	glib2-devel >= 1:2.46.0
 BuildRequires:	gobject-introspection-devel >= 0.10
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	libstdc++-devel >= 6:4.7
-BuildRequires:	meson >= 0.48
+BuildRequires:	meson >= 0.64
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.26
 BuildRequires:	python >= 2
@@ -33,6 +36,10 @@ BuildRequires:	xz
 Requires:	exiv2-libs >= 0.27.4
 Requires:	glib2 >= 1:2.46.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# must be in sitedir due to "..overrides" and "..module" imports
+%define		py_gi_overridesdir	%{py_sitedir}/gi/overrides
+%define		py3_gi_overridesdir	%{py3_sitedir}/gi/overrides
 
 %description
 gexiv2 is a GObject-based wrapper around the Exiv2 library. It makes
@@ -123,6 +130,7 @@ Wiązanie języka vala do biblioteki gexiv2.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %meson build \
@@ -179,12 +187,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-gexiv2
 %defattr(644,root,root,755)
-%{py_sitedir}/gi/overrides/GExiv2.py[co]
+%{py_gi_overridesdir}/GExiv2.py[co]
 
 %files -n python3-gexiv2
 %defattr(644,root,root,755)
-%{py3_sitedir}/gi/overrides/GExiv2.py
-%{py3_sitedir}/gi/overrides/__pycache__/GExiv2.cpython-*.py[co]
+%{py3_gi_overridesdir}/GExiv2.py
+%{py3_gi_overridesdir}/__pycache__/GExiv2.cpython-*.py[co]
 
 %files -n vala-gexiv2
 %defattr(644,root,root,755)

@@ -1,0 +1,11 @@
+--- gexiv2-0.14.1/meson.build.orig	2023-05-06 10:50:03.000000000 +0200
++++ gexiv2-0.14.1/meson.build	2023-05-11 19:18:48.433690796 +0200
+@@ -52,7 +52,7 @@ if get_option('python3')
+     error('Build option \'python3\' requires \'introspection\' to be enabled.')
+   endif
+   python3 = import('python').find_installation('python3', modules: 'gi')
+-  python3.install_sources('GExiv2.py', subdir: 'gi/overrides')
++  python3.install_sources('GExiv2.py', subdir: 'gi/overrides', pure: false)
+ else
+   python3 = disabler()
+ endif
