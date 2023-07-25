@@ -8,12 +8,12 @@
 Summary:	GObject-based wrapper around the Exiv2 library
 Summary(pl.UTF-8):	Oparte na GObject obudowanie biblioteki Exiv2
 Name:		gexiv2
-Version:	0.14.1
+Version:	0.14.2
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://download.gnome.org/sources/gexiv2/0.14/%{name}-%{version}.tar.xz
-# Source0-md5:	b4a7b5e0f2e50a8d295bb2782e071a7f
+# Source0-md5:	1e65556fad5d24a4c365696544d8c945
 Patch0:		%{name}-python-archdir.patch
 URL:		https://wiki.gnome.org/Projects/gexiv2
 BuildRequires:	exiv2-devel >= 0.27.4
