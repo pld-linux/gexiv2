@@ -29,7 +29,7 @@ BuildRequires:	python-pygobject3-devel >= 3
 BuildRequires:	python3 >= 1:3.2
 BuildRequires:	python3-pygobject3-devel >= 3
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	vala
 BuildRequires:	xz
@@ -133,15 +133,15 @@ Wiązanie języka vala do biblioteki gexiv2.
 %patch -P0 -p1
 
 %build
-%meson build \
+%meson \
 	%{?with_apidocs:-Dgtk_doc=true}
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 # no longer installed by meson
 install -d $RPM_BUILD_ROOT%{py_sitedir}/gi/overrides
